@@ -26,9 +26,14 @@ class PluginInstaller extends LibraryInstaller
      */
     public function getPackageBasePath(PackageInterface $package)
     {
-        list($vendor, $package) = explode('/', $package->getPrettyName());
+        $extra = $package->getExtra();
+        if (isset($extra['install-dir'])) {
+            return $extra['install-dir'];
+        } else {
+            list($vendor, $package) = explode('/', $package->getPrettyName());
 
-        return 'srca/' . $vendor . '/Bundle/' . $package;
+            return 'src/' . $vendor . '/Bundle/' . $package;
+        }
     }
 
     /**
