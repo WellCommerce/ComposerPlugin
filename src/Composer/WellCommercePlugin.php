@@ -10,6 +10,29 @@
  * please view the LICENSE file that was distributed with this source code.
  */
 
-class WellCommercePlugin {
+namespace WellCommerce\Composer;
+
+use Composer\Composer;
+use Composer\IO\IOInterface;
+use Composer\Plugin\PluginInterface;
+
+/**
+ * Class WellCommercePlugin
+ *
+ * @author Adam Piotrowski <adam@wellcommerce.org>
+ */
+class WellCommercePlugin implements PluginInterface
+{
+    /**
+     * {@inheritDoc}
+     */
+    public function activate(Composer $composer, IOInterface $io)
+    {
+        $pluginInstaller = new PluginInstaller($io, $composer);
+        $composer->getInstallationManager()->addInstaller($pluginInstaller);
+
+        $themeInstaller = new ThemeInstaller($io, $composer);
+        $composer->getInstallationManager()->addInstaller($themeInstaller);
+    }
 
 } 

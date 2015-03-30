@@ -9,7 +9,22 @@
  * For the full copyright and license information,
  * please view the LICENSE file that was distributed with this source code.
  */
+namespace WellCommerce\Composer;
 
-class ThemeInstaller {
+use Composer\Installer\LibraryInstaller;
 
+/**
+ * Class ThemeInstaller
+ *
+ * @author Adam Piotrowski <adam@wellcommerce.org>
+ */
+class ThemeInstaller extends LibraryInstaller
+{
+    /**
+     * {@inheritDoc}
+     */
+    public function supports($packageType)
+    {
+        return 'wellcommerce-theme' === $packageType;
+    }
 } 
