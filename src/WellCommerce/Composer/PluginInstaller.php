@@ -12,6 +12,7 @@
 namespace WellCommerce\Composer;
 
 use Composer\Installer\LibraryInstaller;
+use Composer\Package\PackageInterface;
 
 /**
  * Class PluginInstaller
@@ -20,6 +21,16 @@ use Composer\Installer\LibraryInstaller;
  */
 class PluginInstaller extends LibraryInstaller
 {
+    /**
+     * {@inheritDoc}
+     */
+    public function getPackageBasePath(PackageInterface $package)
+    {
+        list($vendor, $package) = explode('/', $package->getPrettyName());
+
+        return 'srca/' . $vendor . '/Bundle/' . $package;
+    }
+
     /**
      * {@inheritDoc}
      */
