@@ -1,0 +1,25 @@
+{
+    "name": "wellcommerce/composer-plugin",
+    "type": "composer-plugin",
+    "description": "WellCommerce Composer Plugin",
+    "keywords": [ "composer", "composer-plugin", "plugin", "wellcommerce"],
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Adam Piotrowski",
+            "email": "adam@wellcommerce.org",
+            "homepage": "http://wellcommerce.org"
+        }
+    ],
+    "autoload": {
+        "psr-0": {
+            "WellCommerce\\Composer": "src/"
+        }
+    },
+    "extra": {
+        "class": "WellCommerce\\Composer\\WellCommercePlugin"
+    },
+    "require": {
+        "composer-plugin-api": "1.0.0"
+    }
+}
