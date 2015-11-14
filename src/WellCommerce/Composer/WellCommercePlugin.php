@@ -28,11 +28,10 @@ class WellCommercePlugin implements PluginInterface
      */
     public function activate(Composer $composer, IOInterface $io)
     {
-        $pluginInstaller = new PluginInstaller($io, $composer);
-        $composer->getInstallationManager()->addInstaller($pluginInstaller);
+        $bundleInstaller = new BundleInstaller($io, $composer);
+        $composer->getInstallationManager()->addInstaller($bundleInstaller);
 
         $themeInstaller = new ThemeInstaller($io, $composer);
         $composer->getInstallationManager()->addInstaller($themeInstaller);
     }
-
-} 
+}
