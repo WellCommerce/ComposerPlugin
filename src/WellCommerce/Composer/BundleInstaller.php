@@ -15,11 +15,11 @@ use Composer\Installer\LibraryInstaller;
 use Composer\Package\PackageInterface;
 
 /**
- * Class PluginInstaller
+ * Class BundleInstaller
  *
  * @author Adam Piotrowski <adam@wellcommerce.org>
  */
-class PluginInstaller extends LibraryInstaller
+class BundleInstaller extends LibraryInstaller
 {
     /**
      * {@inheritDoc}
@@ -41,6 +41,6 @@ class PluginInstaller extends LibraryInstaller
      */
     public function supports($packageType)
     {
-        return 'wellcommerce-plugin' === $packageType;
+        return 'wellcommerce-bundle' === $packageType;
     }
 } 
