@@ -32,7 +32,7 @@ class BundleInstaller extends LibraryInstaller
         } else {
             list($vendor, $package) = explode('/', $package->getPrettyName());
 
-            return 'src/' . $vendor . '/Bundle/' . $package;
+            return 'src/' . $vendor . '/' . $package;
         }
     }
 
