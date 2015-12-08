@@ -24,16 +24,11 @@ class BundleInstaller extends LibraryInstaller
     /**
      * {@inheritDoc}
      */
-    public function getPackageBasePath(PackageInterface $package)
+    public function getInstallPath(PackageInterface $package)
     {
-        $extra = $package->getExtra();
-        if (isset($extra['install-dir'])) {
-            return $extra['install-dir'];
-        } else {
-            list($vendor, $package) = explode('/', $package->getPrettyName());
+        list($vendor, $package) = explode('/', $package->getPrettyName());
 
-            return 'src/' . $vendor . '/Bundle/' . $package;
-        }
+        return 'src/' . $vendor . '/Bundle/' . $package;
     }
 
     /**

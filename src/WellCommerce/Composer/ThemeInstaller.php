@@ -24,7 +24,7 @@ class ThemeInstaller extends LibraryInstaller
     /**
      * {@inheritDoc}
      */
-    public function getPackageBasePath(PackageInterface $package)
+    public function getInstallPath(PackageInterface $package)
     {
         list($vendor, $package) = explode('/', $package->getPrettyName());
 
