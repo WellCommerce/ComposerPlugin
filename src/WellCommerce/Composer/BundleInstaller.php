@@ -26,7 +26,7 @@ class BundleInstaller extends LibraryInstaller
      */
     public function getInstallPath(PackageInterface $package)
     {
-        list($vendor, $package) = explode('/', $package->getPrettyName());
+        list($vendor, $package) = explode('/', $package->getName());
 
         return 'src/' . $vendor . '/Bundle/' . $package;
     }
