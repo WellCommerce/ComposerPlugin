@@ -23,14 +23,14 @@ use Composer\Plugin\PluginInterface;
  */
 class WellCommercePlugin implements PluginInterface
 {
-    /**
-     * {@inheritDoc}
-     */
     public function activate(Composer $composer, IOInterface $io)
     {
         $bundleInstaller = new BundleInstaller($io, $composer);
         $composer->getInstallationManager()->addInstaller($bundleInstaller);
-
+    
+        $componentInstaller = new ComponentInstaller($io, $composer);
+        $composer->getInstallationManager()->addInstaller($componentInstaller);
+        
         $themeInstaller = new ThemeInstaller($io, $composer);
         $composer->getInstallationManager()->addInstaller($themeInstaller);
     }

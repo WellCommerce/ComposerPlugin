@@ -21,9 +21,6 @@ use Composer\Package\PackageInterface;
  */
 class BundleInstaller extends LibraryInstaller
 {
-    /**
-     * {@inheritDoc}
-     */
     public function getInstallPath(PackageInterface $package)
     {
         $extra = $package->getExtra();
@@ -31,14 +28,11 @@ class BundleInstaller extends LibraryInstaller
             return $extra['wellcommerce-bundle']['install-dir'];
         } else {
             list($vendor, $package) = explode('/', $package->getRepository());
-
+            
             return 'src/' . $vendor . '/Bundle/' . $package;
         }
     }
-
-    /**
-     * {@inheritDoc}
-     */
+    
     public function supports($packageType)
     {
         return 'wellcommerce-bundle' === $packageType;

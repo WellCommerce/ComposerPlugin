@@ -15,21 +15,26 @@ use Composer\Installer\LibraryInstaller;
 use Composer\Package\PackageInterface;
 
 /**
- * Class ThemeInstaller
+ * Class ComponentInstaller
  *
  * @author Adam Piotrowski <adam@wellcommerce.org>
  */
-class ThemeInstaller extends LibraryInstaller
+class ComponentInstaller extends LibraryInstaller
 {
     public function getInstallPath(PackageInterface $package)
     {
-        list(, $package) = explode('/', $package->getPrettyName());
-        
-        return 'web/themes/' . $package;
+        $extra = $package->getExtra();
+        if (isset($extra['wellcommerce-component']['install-dir'])) {
+            return $extra['wellcommerce-component']['install-dir'];
+        } else {
+            list($vendor, $package) = explode('/', $package->getRepository());
+            
+            return 'src/' . $vendor . '/Component/' . $package;
+        }
     }
     
     public function supports($packageType)
     {
-        return 'wellcommerce-theme' === $packageType;
+        return 'wellcommerce-component' === $packageType;
     }
 } 
