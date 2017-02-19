@@ -11,7 +11,9 @@
  */
 namespace WellCommerce\Composer;
 
+use Composer\Composer;
 use Composer\Installer\LibraryInstaller;
+use Composer\IO\IOInterface;
 use Composer\Package\PackageInterface;
 
 /**
@@ -21,8 +23,20 @@ use Composer\Package\PackageInterface;
  */
 class BundleInstaller extends LibraryInstaller
 {
+    private $developmentMode = false;
+    
+    public function __construct(IOInterface $io, Composer $composer, bool $developmentMode = false)
+    {
+        parent::__construct($io, $composer);
+        $this->developmentMode = $developmentMode;
+    }
+    
     public function getInstallPath(PackageInterface $package)
     {
+        if ($this->developmentMode) {
+            return parent::getInstallPath($package);
+        }
+        
         $extra = $package->getExtra();
         if (isset($extra['wellcommerce-bundle']['install-dir'])) {
             return $extra['wellcommerce-bundle']['install-dir'];

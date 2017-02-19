@@ -25,10 +25,12 @@ class WellCommercePlugin implements PluginInterface
 {
     public function activate(Composer $composer, IOInterface $io)
     {
-        $bundleInstaller = new BundleInstaller($io, $composer);
+        $developmentMode = $this->io->askConfirmation("Do you want to enable development mode? (yes/no) ", false);
+        
+        $bundleInstaller = new BundleInstaller($io, $composer, $developmentMode);
         $composer->getInstallationManager()->addInstaller($bundleInstaller);
-    
-        $componentInstaller = new ComponentInstaller($io, $composer);
+        
+        $componentInstaller = new ComponentInstaller($io, $composer, $developmentMode);
         $composer->getInstallationManager()->addInstaller($componentInstaller);
         
         $themeInstaller = new ThemeInstaller($io, $composer);
