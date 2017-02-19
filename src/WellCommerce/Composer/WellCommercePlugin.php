@@ -25,7 +25,7 @@ class WellCommercePlugin implements PluginInterface
 {
     public function activate(Composer $composer, IOInterface $io)
     {
-        $developmentMode = $this->io->askConfirmation("Do you want to enable development mode? (yes/no) ", false);
+        $developmentMode = $io->askConfirmation("Do you want to enable development mode? (yes/no) ", false);
         
         $bundleInstaller = new BundleInstaller($io, $composer, $developmentMode);
         $composer->getInstallationManager()->addInstaller($bundleInstaller);
