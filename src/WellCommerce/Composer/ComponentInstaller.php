@@ -15,6 +15,7 @@ use Composer\Composer;
 use Composer\Installer\LibraryInstaller;
 use Composer\IO\IOInterface;
 use Composer\Package\PackageInterface;
+use Composer\Repository\InstalledRepositoryInterface;
 
 /**
  * Class ComponentInstaller
@@ -50,7 +51,7 @@ class ComponentInstaller extends LibraryInstaller
     public function update(InstalledRepositoryInterface $repo, PackageInterface $initial, PackageInterface $target)
     {
         $this->isInstall = true;
-        parent::install($repo, $package);
+        parent::update($repo, $initial, $target);
     }
     
     public function supports($packageType)
