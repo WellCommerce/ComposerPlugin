@@ -33,17 +33,15 @@ class BundleInstaller extends LibraryInstaller
     
     public function getInstallPath(PackageInterface $package)
     {
-        if ($this->developmentMode) {
-            return parent::getInstallPath($package);
-        }
-        
-        $extra = $package->getExtra();
-        if (isset($extra['wellcommerce-bundle']['install-dir'])) {
-            return $extra['wellcommerce-bundle']['install-dir'];
-        } else {
-            list($vendor, $package) = explode('/', $package->getRepository());
-            
-            return 'src/' . $vendor . '/Bundle/' . $package;
+        if (false === $this->developmentMode) {
+            $extra = $package->getExtra();
+            if (isset($extra['wellcommerce-bundle']['install-dir'])) {
+                return $extra['wellcommerce-bundle']['install-dir'];
+            } else {
+                list($vendor, $package) = explode('/', $package->getRepository());
+                
+                return 'src/' . $vendor . '/Bundle/' . $package;
+            }
         }
     }
     
