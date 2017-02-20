@@ -23,26 +23,34 @@ use Composer\Package\PackageInterface;
  */
 class ComponentInstaller extends LibraryInstaller
 {
-    private $developmentMode = false;
+    private $isDevelopmentMode = false;
+    private $isInstall         = false;
     
-    public function __construct(IOInterface $io, Composer $composer, bool $developmentMode = false)
+    public function __construct(IOInterface $io, Composer $composer, bool $isDevelopmentMode = false)
     {
         parent::__construct($io, $composer);
-        $this->developmentMode = $developmentMode;
+        $this->isDevelopmentMode = $isDevelopmentMode;
     }
     
     public function getInstallPath(PackageInterface $package)
     {
-        if (false === $this->developmentMode) {
-            $extra = $package->getExtra();
-            if (isset($extra['wellcommerce-component']['install-dir'])) {
-                return $extra['wellcommerce-component']['install-dir'];
-            } else {
-                list($vendor, $package) = explode('/', $package->getRepository());
-                
-                return 'src/' . $vendor . '/Component/' . $package;
-            }
+        if ($this->isInstall && $this->isDevelopmentMode) {
+            return parent::getInstallPath($package);
         }
+        
+        return $package->getExtra()['wellcommerce-component']['install-dir'];
+    }
+    
+    public function install(InstalledRepositoryInterface $repo, PackageInterface $package)
+    {
+        $this->isInstall = true;
+        parent::install($repo, $package);
+    }
+    
+    public function update(InstalledRepositoryInterface $repo, PackageInterface $initial, PackageInterface $target)
+    {
+        $this->isInstall = true;
+        parent::install($repo, $package);
     }
     
     public function supports($packageType)

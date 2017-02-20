@@ -15,6 +15,7 @@ use Composer\Composer;
 use Composer\Installer\LibraryInstaller;
 use Composer\IO\IOInterface;
 use Composer\Package\PackageInterface;
+use Composer\Repository\InstalledRepositoryInterface;
 
 /**
  * Class BundleInstaller
@@ -23,26 +24,34 @@ use Composer\Package\PackageInterface;
  */
 class BundleInstaller extends LibraryInstaller
 {
-    private $developmentMode = false;
+    private $isDevelopmentMode = false;
+    private $isInstall         = false;
     
-    public function __construct(IOInterface $io, Composer $composer, bool $developmentMode = false)
+    public function __construct(IOInterface $io, Composer $composer, bool $isDevelopmentMode = false)
     {
         parent::__construct($io, $composer);
-        $this->developmentMode = $developmentMode;
+        $this->isDevelopmentMode = $isDevelopmentMode;
     }
     
     public function getInstallPath(PackageInterface $package)
     {
-        if (false === $this->developmentMode) {
-            $extra = $package->getExtra();
-            if (isset($extra['wellcommerce-bundle']['install-dir'])) {
-                return $extra['wellcommerce-bundle']['install-dir'];
-            } else {
-                list($vendor, $package) = explode('/', $package->getRepository());
-                
-                return 'src/' . $vendor . '/Bundle/' . $package;
-            }
+        if ($this->isInstall && $this->isDevelopmentMode) {
+            return parent::getInstallPath($package);
         }
+        
+        return $package->getExtra()['wellcommerce-bundle']['install-dir'];
+    }
+    
+    public function install(InstalledRepositoryInterface $repo, PackageInterface $package)
+    {
+        $this->isInstall = true;
+        parent::install($repo, $package);
+    }
+    
+    public function update(InstalledRepositoryInterface $repo, PackageInterface $initial, PackageInterface $target)
+    {
+        $this->isInstall = true;
+        parent::install($repo, $package);
     }
     
     public function supports($packageType)
