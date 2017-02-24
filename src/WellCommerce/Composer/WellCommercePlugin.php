@@ -25,17 +25,6 @@ class WellCommercePlugin implements PluginInterface
 {
     public function activate(Composer $composer, IOInterface $io)
     {
-        $developmentMode = is_file('contributor.sh');
-        if ($developmentMode) {
-            $io->write('<comment>Contributor mode is enabled</comment>');
-        }
-        
-        $bundleInstaller = new BundleInstaller($io, $composer, $developmentMode);
-        $composer->getInstallationManager()->addInstaller($bundleInstaller);
-        
-        $componentInstaller = new ComponentInstaller($io, $composer, $developmentMode);
-        $composer->getInstallationManager()->addInstaller($componentInstaller);
-        
         $themeInstaller = new ThemeInstaller($io, $composer);
         $composer->getInstallationManager()->addInstaller($themeInstaller);
     }
