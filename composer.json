@@ -1,28 +1,33 @@
 {
-    "name": "wellcommerce/composer-plugin",
-    "type": "composer-plugin",
-    "description": "WellCommerce Composer Plugin",
-    "keywords": [ "composer", "composer-plugin", "plugin", "wellcommerce"],
-    "license": "MIT",
-    "authors": [
-        {
-            "name": "Adam Piotrowski",
-            "email": "adam@wellcommerce.org",
-            "homepage": "http://wellcommerce.org"
-        }
-    ],
-    "autoload": {
-        "psr-0": {
-            "WellCommerce\\Composer": "src/"
-        }
-    },
-    "extra": {
-        "class": "WellCommerce\\Composer\\WellCommercePlugin",
-        "branch-alias": {
-            "dev-master": "1.0-dev"
-        }
-    },
-    "require": {
-        "composer-plugin-api": "^1.0"
+  "name": "wellcommerce/composer-plugin",
+  "type": "composer-plugin",
+  "description": "WellCommerce Composer Plugin",
+  "keywords": [
+    "composer",
+    "composer-plugin",
+    "plugin",
+    "wellcommerce"
+  ],
+  "license": "MIT",
+  "authors": [
+    {
+      "name": "Adam Piotrowski",
+      "email": "adam@wellcommerce.org",
+      "homepage": "http://wellcommerce.org"
     }
+  ],
+  "autoload": {
+    "psr-0": {
+      "WellCommerce\\Composer": "src/"
+    }
+  },
+  "extra": {
+    "class": "WellCommerce\\Composer\\WellCommercePlugin",
+    "branch-alias": {
+      "dev-master": "1.0-dev"
+    }
+  },
+  "require": {
+    "composer-plugin-api": "^1.0"
+  }
 }
